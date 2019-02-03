@@ -1,0 +1,31 @@
+{
+  "name": "melody-di",
+  "version": "0.1.0",
+  "description": "A simple Dependency Injection container",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "typings": "dist/types/index.d.ts",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^10.12.21",
+    "jest": "^24.0.0"
+  },
+  "scripts": {
+    "test": "jest",
+    "build": "tsc --build tsconfig.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcelsud/melody-di.git"
+  },
+  "keywords": [
+    "dependency-injection",
+    "di"
+  ],
+  "author": "Marcelo Santos <marcelsud@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/marcelsud/melody-di/issues"
+  },
+  "homepage": "https://github.com/marcelsud/melody-di#readme"
+}
