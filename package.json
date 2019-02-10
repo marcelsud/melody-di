@@ -11,7 +11,7 @@
     "jest": "^24.0.0"
   },
   "scripts": {
-    "test": "jest",
+    "test": "npm run build && jest",
     "build": "tsc --build tsconfig.json"
   },
   "repository": {
