@@ -1,6 +1,6 @@
 # MelodyDI
 
-A simple PHP Dependency Injection Container for Javascript/Typescript
+A simple Dependency Injection Container for Javascript/Typescript
 
 ## Installation
 
@@ -22,7 +22,6 @@ ES6/Typescript:
 
 ```
 import { Container } from 'melody-di'
-
 const container = new Container()
 ```
 
@@ -30,7 +29,6 @@ or
 
 ```
 const Container = require('melody-di').Container;
-
 const container = new Container()
 ```
 
