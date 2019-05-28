@@ -1,5 +1,5 @@
 {
-  "name": "melody-di",
+  "name": "marcelsud/melody-di",
   "version": "0.1.0",
   "description": "A simple Dependency Injection container",
   "main": "dist/index.js",
