@@ -2,7 +2,7 @@ type Store = Map<string, Callable>;
 export type Callable = (container: Container) => any
 
 export interface ProviderInterface {
-    register(c: Container)
+    register(c: Container): void
 }
 
 export class Container {
