@@ -59,6 +59,20 @@ const calculatorService = container.get<CalculatorService>('calculator_service')
 console.log(calculatorService.sum(10, 5)) // 15
 ```
 
+It can also be added as a promise
+
+```typescript
+container.set('calculator_service', async (c: Container) => {
+  const somethingElse = await c.get<Promise<SomethingElse>>('something_else')
+  return new CalculatorService(somethingElse)
+})
+
+// 2000 years later...
+
+const service = await container.get<Promise<CalculatorService>>('calculator_service')
+console.log(service.sum(20, 30)) // 50
+```
+
 ### Adding a plain value into the container
 
 You can add a static value into the container, such as a number, a string, or even an object:

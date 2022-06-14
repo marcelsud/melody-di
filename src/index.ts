@@ -16,21 +16,21 @@ export class Container {
         this.store.set(id, callback)
     }    
 
-    async get<T>(id: string): Promise<T> {
+    get<T>(id: string): T {
         if (!this.store.has(id)) {
             throw new Error(`Service ${id} not found`)
         }
 
-        let service = this.store.get(id)
+        let entry = this.store.get(id)
 
-        if (service === undefined) {
+        if (entry === undefined || entry === null) {
             throw new Error(`Service ${id} not found`)
         }
 
-        if (typeof service === "function") {
-            return service(this)
+        if (typeof entry === "function") {
+            return entry(this)
         }
 
-        return service
+        return entry
     }
 }

@@ -28,8 +28,15 @@ beforeEach(() => {
     return new UpperCaseTransformer();
   });
 
-  container.set("transformer", async (c: Container) => {
-    const upperCaseTransformer = await c.get<UpperCaseTransformer>(
+  container.set("async_transformer", async (c: Container) => {
+    const upperCaseTransformer = await c.get<Promise<UpperCaseTransformer>>(
+      "upper_case_transformer"
+    );
+    return new Transformer(upperCaseTransformer);
+  });
+
+  container.set("transformer", (c: Container) => {
+    const upperCaseTransformer = c.get<UpperCaseTransformer>(
       "upper_case_transformer"
     );
     return new Transformer(upperCaseTransformer);
@@ -37,23 +44,27 @@ beforeEach(() => {
 });
 
 describe("All the tests needed and more", () => {
-  it("it should add a parameter properly", async () => {
+  it("it should add a parameter properly", () => {
     container.set("dummy_secret_key", "something");
-
-    let value = await container.get("dummy_secret_key");
+    let value = container.get("dummy_secret_key");
     expect(value == "something");
   });
 
   it("it should add a simple service properly", async () => {
-    const transformer = await container.get<UpperCaseTransformer>(
+    const transformer = container.get<UpperCaseTransformer>(
       "upper_case_transformer"
     );
-
     expect(transformer.transform("test")).toBe("TEST");
   });
 
+
   it("it should add a simple service that depends on another one properly", async () => {
-    const transformer = await container.get<Transformer>("transformer");
+    const transformer = container.get<Transformer>("transformer");
+    expect(transformer.transform("test", Transformers.UPPER_CASE)).toBe("TEST");
+  });
+
+  it("it should add a simple service that depends on another one properly and retrieve it from a promise", async () => {
+    const transformer = await container.get<Promise<Transformer>>("async_transformer");
     expect(transformer.transform("test", Transformers.UPPER_CASE)).toBe("TEST");
   });
 });
