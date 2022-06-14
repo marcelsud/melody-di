@@ -1,13 +1,15 @@
 {
   "name": "@marcelsud/melody-di",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A simple Dependency Injection container",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "prepublish": "tsc"
   },
   "repository": {
     "type": "git",
