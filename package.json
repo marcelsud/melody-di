@@ -1,9 +1,9 @@
 {
   "name": "@marcelsud/melody-di",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A simple Dependency Injection container",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "types": "dist/types/index.d.ts",
   "directories": {
     "test": "test"
   },
@@ -19,7 +19,7 @@
     "dependency",
     "injection"
   ],
-  "author": "Marcelo Santos <@marcelsud>",
+  "author": "Marcelo Santos @marcelsud",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/marcelsud/melody-di/issues"
