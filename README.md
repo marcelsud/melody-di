@@ -1,5 +1,5 @@
 
-# Melody Dependency Injection (melody-di)
+# Melody Dependency Injection
 
 A simple dependency injection Container for Javascript/Typescript.
 
@@ -15,13 +15,13 @@ A simple dependency injection Container for Javascript/Typescript.
 You can use NPM or Yarn to install it
 
 ```bash
-npm install --save melody-di
+npm install --save @marcelsud/melody-di
 ```
 
 or
 
 ```bash
-yarn add melody-di
+yarn add @marcelsud/melody-di
 ```
 
 ## 🔥 Usage
@@ -33,7 +33,7 @@ Creating a container and adding dependencies is pretty straightforward.
 First, create the container:
 
 ```typescript
-import { Container } from 'melody-di'
+import { Container } from '@marcelsud/melody-di'
 const container = new Container()
 ```
 
