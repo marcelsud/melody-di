@@ -1,6 +1,6 @@
 {
   "name": "@marcelsud/melody-di",
-  "version": "0.1.4",
+  "version": "0.1.6",
   "description": "A simple Dependency Injection container",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
@@ -9,6 +9,7 @@
   },
   "scripts": {
     "test": "jest",
+    "build": "tsc",
     "prepublish": "tsc",
     "publish": "tsc && npm publish --access=public"
   },
