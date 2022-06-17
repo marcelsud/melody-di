@@ -1,6 +1,6 @@
 {
   "name": "@marcelsud/melody-di",
-  "version": "0.1.6",
+  "version": "0.1.5",
   "description": "A simple Dependency Injection container",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
