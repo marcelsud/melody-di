@@ -1,119 +1,87 @@
+# MeloDI
 
-# Melody Dependency Injection
+A small dependency injection container for JavaScript and TypeScript, with no runtime dependencies.
 
-A simple dependency injection Container for Javascript/Typescript.
+## Package rename
 
+MeloDI is the new name of Melody DI. The new package identity is `@marcelsud/melodi`; the existing `@marcelsud/melody-di@0.1.5` package remains available.
 
-- ☑️ Easy to use
-- ☑️ Maintainable
-- ☑️ Portable
+This source prepares the renamed package. Until a new-name release is confirmed on npm, existing users should keep installing the old package. The rename preserves `Container`, `container`, `createContainer` and their runtime behavior.
 
----
+After the renamed package is published, migrate your installation and imports:
 
-## 📜 How to install
-
-You can use NPM or Yarn to install it
-
-```bash
-npm install --save @marcelsud/melody-di
+```sh
+npm uninstall @marcelsud/melody-di
+npm install @marcelsud/melodi
 ```
-
-or
-
-```bash
-yarn add @marcelsud/melody-di
-```
-
-## 🔥 Usage
-
-### Adding and getting a dependency
-
-Creating a container and adding dependencies is pretty straightforward.
-
-First, create the container:
 
 ```typescript
-import { Container } from '@marcelsud/melody-di'
-const container = new Container()
+import { Container, createContainer, container } from '@marcelsud/melodi';
 ```
 
-After that add some dependency into the container:
+Use one package identity throughout an application. Installing both names creates separate module instances and separate global `container` objects.
+
+## Register and resolve services
 
 ```typescript
+import { createContainer } from '@marcelsud/melodi';
 
-class CalculatorService {
+class Calculator {
   sum(a: number, b: number): number {
     return a + b;
   }
 }
 
-container.set('calculator_service', () => {
-  return new CalculatorService()
-})
+const services = createContainer();
+services.set('calculator', () => new Calculator());
+const calculator = services.get<Calculator>('calculator');
+console.log(calculator.sum(10, 5)); // 15
 ```
 
-Then, get it somewhere else:
+A factory receives the current container and runs on every `get`. To share a single instance, register that instance as a value:
 
 ```typescript
-const calculatorService = container.get<CalculatorService>('calculator_service')
-console.log(calculatorService.sum(10, 5)) // 15
+const calculator = new Calculator();
+services.set('sharedCalculator', calculator);
+services.set('taxRate', 0.2);
 ```
 
-It can also be added as a promise
+All function values are treated as factories. To resolve a function as a value, wrap it in another function: `services.set('transform', () => myTransform)`.
+
+## Resolve asynchronous factories
 
 ```typescript
-container.set('calculator_service', async (c: Container) => {
-  const somethingElse = await c.get<Promise<SomethingElse>>('something_else')
-  return new CalculatorService(somethingElse)
-})
-
-// 2000 years later...
-
-const service = await container.get<Promise<CalculatorService>>('calculator_service')
-console.log(service.sum(20, 30)) // 50
+services.set('greeting', async () => 'Hello');
+const greeting = await services.get<Promise<string>>('greeting');
 ```
 
-### Adding a plain value into the container
+MeloDI returns the factory's value directly; callers must await promises themselves. It does not add caching, automatic constructor injection, disposal or cycle detection.
 
-You can add a static value into the container, such as a number, a string, or even an object:
+## API and errors
 
-```typescript
-container.set('some_config', 'SUPER_SECRET_INFORMATION')
-container.set('some_important_ttl', 5000)
-container.set('some_config_map', {
-  something: 'QWERTYUIOPASDFGHJKL'   
-})
+| Export | Behavior |
+| --- | --- |
+| `new Container()` | Create an independent container. |
+| `createContainer()` | Create an independent container. |
+| `container` | Shared container for this installed module instance. |
+| `set(id, valueOrFactory)` | Register or replace a string key. |
+| `get<T>(id)` | Resolve a value or invoke its factory with this container. |
 
-// Directly instantiating the object
-container.set('calculator_service', new CalculatorService())
+Missing keys and keys holding null or undefined throw `Error("Service <id> not found")`. Other values, including false, zero and empty strings, can be resolved. The generic type argument describes the caller's expected type; it does not validate values at runtime.
+
+## Maintenance
+
+The project has a stable API. Maintenance focuses on reproducible bugs, packaging and compatibility, without expanding into a framework. CI checks the source and packed consumers on Node.js 22, 24 and 26. Other JavaScript runtimes are best effort until explicitly verified.
+
+## Develop and verify
+
+```sh
+npm ci
+npm run check
 ```
 
-## 🟢 Running the tests
+The check builds the library, runs the unit tests and verifies the packed package from an isolated JavaScript/TypeScript consumer. Publishing requires a separate authenticated release action; CI does not publish automatically.
 
-To run the tets:
+## License
 
-```bash
-  npm t
-```
-
-or
-
-```bash
-  yarn test
-```
-
-
-## 🚀 About the author
-
-I am a passionate Principal Software Engineer. Amongst my favorite topics are Clean Architecture, Domain-Driven Design and Event-Driven Architecture. 
-
-You can find me out on:
-
-- <a href="https://www.linkedin.com/in/marcelsud/" target="_blank"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" /></a>
-- <a href="https://twitter.com/marcelsud" target="_blank"><img src="https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white" /></a>
-
-
-## 📝 License
-
-[MIT](https://choosealicense.com/licenses/mit/)
-
+[MIT](LICENSE).
