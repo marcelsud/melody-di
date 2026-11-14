@@ -21,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/marcelsud/melody-di.git"
+    "url": "git+https://github.com/marcelsud/melodi.git"
   },
   "keywords": [
     "dependency",
@@ -30,9 +30,9 @@
   "author": "Marcelo Santos @marcelsud",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/marcelsud/melody-di/issues"
+    "url": "https://github.com/marcelsud/melodi/issues"
   },
-  "homepage": "https://github.com/marcelsud/melody-di#readme",
+  "homepage": "https://github.com/marcelsud/melodi#readme",
   "devDependencies": {
     "@types/jest": "^29.5.14",
     "@types/node": "^22.20.5",
