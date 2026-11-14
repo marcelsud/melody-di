@@ -2,16 +2,11 @@
 
 A small dependency injection container for JavaScript and TypeScript, with no runtime dependencies.
 
-## Package rename
+## Install
 
-MeloDI is the new name of Melody DI. The new package identity is `@marcelsud/melodi`; the existing `@marcelsud/melody-di@0.1.5` package remains available.
-
-This source prepares the renamed package. Until a new-name release is confirmed on npm, existing users should keep installing the old package. The rename preserves `Container`, `container`, `createContainer` and their runtime behavior.
-
-After the renamed package is published, migrate your installation and imports:
+Install the package from npm:
 
 ```sh
-npm uninstall @marcelsud/melody-di
 npm install @marcelsud/melodi
 ```
 
@@ -19,7 +14,7 @@ npm install @marcelsud/melodi
 import { Container, createContainer, container } from '@marcelsud/melodi';
 ```
 
-Use one package identity throughout an application. Installing both names creates separate module instances and separate global `container` objects.
+The package exports `Container`, `createContainer` and a shared `container`.
 
 ## Register and resolve services
 
