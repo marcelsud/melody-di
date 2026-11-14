@@ -22,7 +22,7 @@ describe("All the tests needed and more", () => {
   it("it should add a parameter properly", () => {
     container.set("dummy_secret_key", "something");
     let value = container.get("dummy_secret_key");
-    expect(value == "something");
+    expect(value).toBe("something");
   });
 
   it("it should add a simple service properly", async () => {
